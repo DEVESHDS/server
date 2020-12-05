@@ -17,18 +17,18 @@ app.options("*", cors());
 //   next();
 // });
 
-mongoose.connect(process.env.mongourl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-app
-  .get("/", (req, res) => {
-    console.log("Welcome to code dump");
-    res.send("Welcome to code dump");
+mongoose
+  .connect(process.env.mongourl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to DB!"))
   .catch((error) => console.log(error.message));
+
+app.get("/", (req, res) => {
+  console.log("Welcome to code dump");
+  res.send("Welcome to code dump");
+});
 
 app.post("/create", (req, res) => {
   const obj = { content: req.body.code };
